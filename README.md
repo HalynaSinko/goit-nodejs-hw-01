@@ -2,8 +2,8 @@
 
 1. Get and output the entire list of contacts as a table.
 
-node index.js --action list
-https://monosnap.com/file/yTlymbow6vSpTsqnALrvpkRs0WOe05
+[node index.js --action list]
+(https://monosnap.com/file/yTlymbow6vSpTsqnALrvpkRs0WOe05)
 
 2. Get contact by id.
 
