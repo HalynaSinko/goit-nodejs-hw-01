@@ -1,4 +1,5 @@
-# goit-nodejs-hw-01 CLI-aplication
+ goit-nodejs-hw-01  
+# CLI-aplication
 
 ## 1. Get and output the entire list of contacts as a table.
 
