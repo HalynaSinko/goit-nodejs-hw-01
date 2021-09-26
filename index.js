@@ -31,7 +31,7 @@ function invokeAction({ action, id, name, email, phone }) {
       getContactById(id)
         .then((contact) => {
           if (contact) {
-            console.log(chalk.blackBright("Contact found"));
+            console.log(chalk.blueBright("Contact found"));
             console.log(contact);
           } else {
             chalk.red("Contact not found");
@@ -51,10 +51,10 @@ function invokeAction({ action, id, name, email, phone }) {
 
     case "remove":
       removeContact(id)
-        .then((contacts) => {
-          if (contacts.length !== 0) {
+        .then(([contacts, isChange]) => {
+          if (isChange) {
             console.log(chalk.blueBright("Contact removed"));
-            console.log(contacts);
+            console.table(contacts);
           } else {
             console.log(chalk.red(`Contact with id=${id} not found!`));
           }

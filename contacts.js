@@ -30,13 +30,20 @@ async function getContactById(contactId) {
 
 async function removeContact(contactId) {
   try {
+    console.log(contactId);
     const contacts = await readContacts();
     if (contacts.length === 0) {
-      return contacts;
+      return [contacts, false];
     }
-    const result = contacts.filter((contact) => contact.id !== contactId);
+    const result = contacts.filter((contact) => {
+      console.log(contact.id);
+      return contact.id !== contactId;
+    });
+    if (contacts.length === result.length) {
+      return [contacts, false];
+    }
     await fs.writeFile(contactsPath, JSON.stringify(result, null, 2));
-    return result;
+    return [result, true];
   } catch (err) {
     console.error(err);
   }
