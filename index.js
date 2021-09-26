@@ -1,5 +1,13 @@
 const { Command } = require("commander");
+const chalk = require("chalk");
+const {
+  listContacts,
+  addContact,
+  getContactById,
+  removeContact,
+} = require("./contacts.js");
 const program = new Command();
+
 program
   .option("-a, --action <type>", "choose action")
   .option("-i, --id <type>", "user id")
@@ -11,27 +19,51 @@ program.parse(process.argv);
 
 const argv = program.opts();
 
-// TODO: рефакторить
 function invokeAction({ action, id, name, email, phone }) {
   switch (action) {
     case "list":
-      // ...
+      listContacts()
+        .then((contacts) => console.table(contacts))
+        .catch(console.error);
       break;
 
     case "get":
-      // ... id
+      getContactById(id)
+        .then((contact) => {
+          if (contact) {
+            console.log(chalk.blackBright("Contact found"));
+            console.log(contact);
+          } else {
+            chalk.red("Contact not found");
+          }
+        })
+        .catch(console.error);
       break;
 
     case "add":
-      // ... name email phone
+      addContact(name, email, phone)
+        .then((contact) => {
+          console.log(chalk.green("Add new contact"));
+          console.log(contact);
+        })
+        .catch(console.error);
       break;
 
     case "remove":
-      // ... id
+      removeContact(id)
+        .then((contacts) => {
+          if (contacts.length !== 0) {
+            console.log(chalk.blueBright("Contact removed"));
+            console.log(contacts);
+          } else {
+            console.log(chalk.red(`Contact with id=${id} not found!`));
+          }
+        })
+        .catch(console.error);
       break;
 
     default:
-      console.warn("\x1B[31m Unknown action type!");
+      console.warn(chalk.red("Unknown action type!"));
   }
 }
 
