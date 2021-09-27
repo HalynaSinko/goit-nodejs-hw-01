@@ -1,7 +1,7 @@
 const { Command } = require("commander");
 const chalk = require("chalk");
 const {
-  listContacts,
+  readContacts,
   addContact,
   getContactById,
   removeContact,
@@ -22,7 +22,7 @@ const argv = program.opts();
 function invokeAction({ action, id, name, email, phone }) {
   switch (action) {
     case "list":
-      listContacts()
+      readContacts()
         .then((contacts) => console.table(contacts))
         .catch(console.error);
       break;
