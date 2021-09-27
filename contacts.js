@@ -14,10 +14,6 @@ const readContacts = async () => {
   }
 };
 
-function listContacts() {
-  return readContacts();
-}
-
 async function getContactById(contactId) {
   try {
     const contacts = await readContacts();
@@ -61,4 +57,4 @@ async function addContact(name, email, phone) {
   }
 }
 
-module.exports = { listContacts, getContactById, removeContact, addContact };
+module.exports = { readContacts, getContactById, removeContact, addContact };
